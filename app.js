@@ -7,6 +7,8 @@ Application.prototype.server = null;
 
 // Main fucntion for start initialize application.
 Application.prototype.init = function () {
+
+    // Entry point for all requests.
     this.server.all('*', function (req, res, next) {
         global.request = req;
         global.response = res;
@@ -16,7 +18,15 @@ Application.prototype.init = function () {
         const controller = parsedControllerAndNode[0];
         const node = parsedControllerAndNode[1];
 
-        const requiredController = require('./controllers/' + controller);
+        let requiredController;
+
+        try {
+            requiredController = require('./controllers/' + controller);
+        } catch (error) {
+            res.statusMessage = 'URL not found';
+            res.status(404).send('URL not found');
+            return;
+        }
 
         if (node in requiredController) {
             if (requiredController[node] === false) {
@@ -28,7 +38,7 @@ Application.prototype.init = function () {
             requiredController[node]();
         }
 
-        next();
+        // next();
     });
 }
 

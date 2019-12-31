@@ -1,7 +1,7 @@
 const guard = require('../guard');
 
 function show() {
-    response.send('Hello from Home-Show controller');
+    response.render('home', {title:'Test title'});
 }
 
 function user() {
