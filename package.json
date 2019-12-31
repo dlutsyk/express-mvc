@@ -2,12 +2,12 @@
     "name": "express-skeleton",
     "version": "1.0.0",
     "description": "",
-    "main": "app.js",
+    "main": "nodemon server.js",
     "directories": {
         "test": "test"
     },
     "scripts": {
-        "test": "mocha index.js"
+        "test": "mocha"
     },
     "author": "",
     "license": "ISC",
